@@ -219,7 +219,7 @@ public:
 };
 
 decoder::decoder(std::string code, std::string key) 
-    : m_code(code), m_key(key), m_result("")
+    : m_code(code), m_key(key)
 {
     int size = m_code.length()/8;
     for (int i {}; i < size; ++i) {    
@@ -265,23 +265,25 @@ decoder::decoder(std::string code, std::string key)
 }
 
 std::string decoder::decoding() { 
+    if (m_decoder_result != "") return m_decoder_result;
     for (int i {}; i < m_words.size(); ++i) {
         std::string current_word = m_words[i];
         for (int j {}; j < m_word_keys[i].size(); ++j) {
             current_word = utility::rotate(current_word, m_word_keys[i][j].first(), m_word_keys[i][j].seconde()); 
         }
-        m_result += current_word;
+        m_decoder_result += current_word;
     }
-    return m_result; 
+    return m_decoder_result; 
 }
 
 std::string decoder::coding() { 
+    if (m_coder_result != "") return m_coder_result;
     for (int i {}; i < m_words.size(); ++i) {
         std::string current_word = m_words[i];
         for (int j {}; j < m_word_keys[i].size(); ++j) {
             current_word = utility::rotate_c(current_word, m_word_keys[i][j].first(), m_word_keys[i][j].seconde()); 
         }
-        m_result += current_word;
+        m_coder_result += current_word;
     }
-    return m_result; 
+    return m_coder_result; 
 }

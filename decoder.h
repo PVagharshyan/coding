@@ -43,7 +43,8 @@ private:
     std::vector<std::string> m_words;
     std::string m_key;
     std::vector< std::vector< group<char, int> >  > m_word_keys;
-    std::string m_result;
+    std::string m_decoder_result = "";
+    std::string m_coder_result = "";
 };
 
 
